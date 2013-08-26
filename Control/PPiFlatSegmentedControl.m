@@ -149,14 +149,6 @@
     _color=color;
     [self updateSegmentsFormat];
 }
--(void)setTextColor:(UIColor *)textColor{
-    _textColor=textColor;
-    [self updateSegmentsFormat];
-}
--(void)setSelectedTextColor:(UIColor *)selectedTextColor{
-    _selectedTextColor=selectedTextColor;
-    [self updateSegmentsFormat];
-}
 -(void)setBorderWidth:(CGFloat)borderWidth{
     _borderWidth=borderWidth;
     [self updateSegmentsFormat];
@@ -177,15 +169,11 @@
     if(index<self.segments.count){
         UIButton *segment=self.segments[index];
         if([title isKindOfClass:[NSString class]]){
-            [segment setTitle:title forState:UIControlStateNormal];
+            [segment setButtonText:title];
         }else if ([title isKindOfClass:[NSAttributedString class]]){
-            [segment setAttributedTitle:title forState:UIControlStateNormal];
+            [segment setButtonText:title];
         }
     }
-}
--(void)setTextFont:(UIFont *)textFont{
-    _textFont=textFont;
-    [self updateSegmentsFormat];
 }
 -(void)setBorderColor:(UIColor *)borderColor{
     //Setting boerder color to all view
@@ -214,13 +202,3 @@
 }
 @end
 
-
-/*
- // Create the path (with only the top-left corner rounded)
- UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:imageView.bounds byRoundingCorners:UIRectCornerTopLeft| UIRectCornerTopRight                                                         cornerRadii:CGSizeMake(10.0, 10.0)];
- // Create the shape layer and set its path
- CAShapeLayer *maskLayer = [CAShapeLayer layer];
- maskLayer.frame = imageView.bounds;
- maskLayer.path = maskPath.CGPath;
- // Set the newly created shape layer as the mask for the image view's layer
- imageView.layer.mask = maskLayer;*/

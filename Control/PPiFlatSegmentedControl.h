@@ -27,8 +27,6 @@ typedef void(^selectionBlock)(NSUInteger segmentIndex);
 
 @property (nonatomic,strong) UIColor *selectedColor;
 @property (nonatomic,strong) UIColor *color;
-@property (nonatomic,strong) UIColor *textColor;
-@property (nonatomic,strong) UIColor *selectedTextColor;
 @property (nonatomic,strong) UIFont *textFont;
 @property (nonatomic,strong) UIColor *borderColor;
 @property (nonatomic) CGFloat borderWidth;
@@ -40,7 +38,6 @@ typedef void(^selectionBlock)(NSUInteger segmentIndex);
 -(void)setEnabled:(BOOL)enabled forSegmentAtIndex:(NSUInteger)segment;
 -(BOOL)isEnabledForSegmentAtIndex:(NSUInteger)index;
 -(void)setTitle:(id)title forSegmentAtIndex:(NSUInteger)index;
--(void)setTitleTextAttributes:(NSDictionary*)attributes;
 
 
 @end
