@@ -45,7 +45,7 @@ The parameters you are able to modify are the following:
 * **textAttributes**: Text attributes for non selected state
 * **selectedTextAttributes**: Text attributes for selected state 
 
-( If you have doubts you should consult more information in Apple Documentation or ![PPiAwesomeButton]() )
+( If you have doubts you should consult more information in Apple Documentation or https://github.com/pepibumur/PPiAwesomeButton )
 
 
 *Note: When you initialize the control you have to pass a Block with the behaviour when any segment has been selected*
