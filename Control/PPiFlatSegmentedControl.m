@@ -18,20 +18,6 @@
 
 
 @implementation PPiFlatSegmentedControl
-@synthesize  segments=_segments;
-@synthesize selectedColor=_selectedColor;
-@synthesize color=_color;
-@synthesize textColor=_textColor;
-@synthesize selectedTextColor=_selectedTextColor;
-@synthesize borderColor=_borderColor;
-@synthesize currentSelected=_currentSelected;
-@synthesize textFont=_textFont;
-@synthesize separators=_separators;
-@synthesize borderWidth=_borderWidth;
-@synthesize selBlock=_selBlock;
-@synthesize textAttributes=_textAttributes;
-@synthesize selectedTextAttributes=_selectedTextAttributes;
-
 /**
  *	Method for initialize PPiFlatSegmentedControl
  *
@@ -41,7 +27,7 @@
  *
  *	@return	Instantiation of PPiFlatSegmentedControl
  */
-- (id)initWithFrame:(CGRect)frame andItems:(NSArray*)items andSelectionBlock:(selectionBlock)block{
+- (id)initWithFrame:(CGRect)frame items:(NSArray*)items iconPosition:(IconPosition)position andSelectionBlock:(selectionBlock)block{
     self = [super initWithFrame:frame];
     if (self) {
         //Selection block
@@ -53,11 +39,12 @@
         //Generating segments
         float buttonWith=frame.size.width/items.count;
         int i=0;
-        for(NSString *item in items){
-            UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame=CGRectMake(buttonWith*i, 0, buttonWith, frame.size.height);
-            [button setTitle:item forState:UIControlStateNormal];
-            [button setTitle:item forState:UIControlStateHighlighted];
+        for(NSDictionary *item in items){
+            NSString *text=item[@"text"];
+            NSString *icon=item[@"icon"];
+
+            UIButton *button =[[UIButton alloc] initWithFrame:CGRectMake(buttonWith*i, 0, buttonWith, frame.size.height) text:text icon:icon textAttributes:nil andIconPosition:position];
+
             [button addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventTouchUpInside];
             
             //Adding to self view
@@ -135,21 +122,21 @@
     
     //Modifying buttons with current State
     for (UIButton *segment in self.segments){
-        [segment.titleLabel setFont:self.textFont];
+        //Setting icon Position
+        if(self.iconPosition)
+            [segment setIconPosition:self.iconPosition];
+        
+        //Setting format depending on if it's selected or not
         if([self.segments indexOfObject:segment]==self.currentSelected){
             //Selected-one
-            if(self.selectedColor)[segment setBackgroundColor:self.selectedColor];
-            if(self.selectedTextColor)[segment setTitleColor:self.selectedTextColor forState:UIControlStateNormal];
-            if(self.selectedTextColor)[segment setTitleColor:self.selectedTextColor forState:UIControlStateHighlighted];
+            if(self.selectedColor)[segment setBackgroundColor:self.selectedColor forUIControlState:UIControlStateNormal];
             if(self.selectedTextAttributes)
-                [segment.titleLabel setValuesForKeysWithDictionary:self.selectedTextAttributes];
+                [segment setTextAttributes:self.selectedTextAttributes forUIControlState:UIControlStateNormal];
         }else{
             //Non selected
-            if(self.color)[segment setBackgroundColor:self.color];
-            if(self.textColor)[segment setTitleColor:self.textColor forState:UIControlStateNormal];
-            if(self.textColor)[segment setTitleColor:self.textColor forState:UIControlStateHighlighted];
+            if(self.color)[segment setBackgroundColor:self.color forUIControlState:UIControlStateNormal];
             if(self.textAttributes)
-                [segment.titleLabel setValuesForKeysWithDictionary:self.textAttributes];
+                [segment setTextAttributes:self.textAttributes forUIControlState:UIControlStateNormal];
         }
         segment.titleLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -167,14 +154,17 @@
     [self updateSegmentsFormat];
 }
 -(void)setSelectedTextColor:(UIColor *)selectedTextColor{
-    selectedTextColor=_selectedTextColor;
+    _selectedTextColor=selectedTextColor;
     [self updateSegmentsFormat];
 }
 -(void)setBorderWidth:(CGFloat)borderWidth{
     _borderWidth=borderWidth;
     [self updateSegmentsFormat];
 }
-
+-(void)setIconPosition:(IconPosition)iconPosition{
+    _iconPosition=iconPosition;
+    [self updateSegmentsFormat];
+}
 /**
  *	Using this method name of a specified segmend can be changed
  *
