@@ -38,6 +38,7 @@ typedef void(^selectionBlock)(NSUInteger segmentIndex);
 -(void)setEnabled:(BOOL)enabled forSegmentAtIndex:(NSUInteger)segment;
 -(BOOL)isEnabledForSegmentAtIndex:(NSUInteger)index;
 -(void)setTitle:(id)title forSegmentAtIndex:(NSUInteger)index;
+-(void)setSelectedTextAttributes:(NSDictionary*)attributes;
 
 
 @end
