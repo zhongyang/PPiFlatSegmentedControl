@@ -37,7 +37,7 @@
         self.backgroundColor=[UIColor clearColor];
         
         //Generating segments
-        float buttonWith=frame.size.width/items.count;
+        float buttonWith=round(frame.size.width / items.count);
         int i=0;
         for(NSDictionary *item in items){
             NSString *text=item[@"text"];
