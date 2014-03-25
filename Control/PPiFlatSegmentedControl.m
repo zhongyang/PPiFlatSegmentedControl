@@ -53,7 +53,7 @@
             if([icon isKindOfClass:[UIImage class]]){
                 button = [[UIAwesomeButton alloc] initWithFrame:CGRectMake(buttonWith*i, 0, buttonWith, frame.size.height) text:text iconImage:(UIImage *)icon attributes:@{} andIconPosition:position];
             }
-            else if([icon isKindOfClass:[NSString class]]){
+            else{
                 button = [[UIAwesomeButton alloc] initWithFrame:CGRectMake(buttonWith*i, 0, buttonWith, frame.size.height) text:text icon:(NSString *)icon attributes:@{} andIconPosition:position];
             }
             
