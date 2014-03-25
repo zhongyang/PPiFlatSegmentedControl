@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "UIButton+PPiAwesome.h"
-
+#import "UIAwesomeButton.h"
 typedef void(^selectionBlock)(NSUInteger segmentIndex);
 
 @interface PPiFlatSegmentedControl : UIView
@@ -32,9 +31,9 @@ typedef void(^selectionBlock)(NSUInteger segmentIndex);
 @property (nonatomic) CGFloat borderWidth;
 @property (nonatomic,strong) NSDictionary *textAttributes;
 @property (nonatomic,strong) NSDictionary *selectedTextAttributes;
-@property (nonatomic) IconPosition iconPosition;
+@property (nonatomic)  IconPosition iconPosition;
 
-- (id)initWithFrame:(CGRect)frame items:(NSArray*)items iconPosition:(IconPosition)position andSelectionBlock:(selectionBlock)block;
+- (id)initWithFrame:(CGRect)frame items:(NSArray*)items iconPosition:(IconPosition)position andSelectionBlock:(selectionBlock)block iconSeparation:(CGFloat)separation;
 -(void)setEnabled:(BOOL)enabled forSegmentAtIndex:(NSUInteger)segment;
 -(BOOL)isEnabledForSegmentAtIndex:(NSUInteger)index;
 -(void)setTitle:(id)title forSegmentAtIndex:(NSUInteger)index;

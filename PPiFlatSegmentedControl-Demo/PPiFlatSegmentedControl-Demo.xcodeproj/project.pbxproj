@@ -22,6 +22,8 @@
 		3D3A158017B94FDE004C044F /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3A157F17B94FDE004C044F /* fontawesome-webfont.ttf */; };
 		3DDAD74417B949AA008C9AEA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DDAD74317B949AA008C9AEA /* QuartzCore.framework */; };
 		AFD9EFA6133948748D10F2DE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DFD36B0C8994CE9B32D958C /* libPods.a */; };
+		B749E7309C6B9A68A764A38F /* eye@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B749E3EF83421F1C79A2B094 /* eye@2x.png */; };
+		B749EDE528B7F8B1AFE6006C /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = B749E64532B8A0A976C2CCA4 /* eye.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		3D2E5C0317B93ABC00D839AB /* PPiFlatSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPiFlatSegmentedControl.m; sourceTree = "<group>"; };
 		3D3A157F17B94FDE004C044F /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		3DDAD74317B949AA008C9AEA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B749E3EF83421F1C79A2B094 /* eye@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eye@2x.png"; sourceTree = "<group>"; };
+		B749E64532B8A0A976C2CCA4 /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 				3D2E5BF917B93AAC00D839AB /* ViewController.h */,
 				3D2E5BFA17B93AAC00D839AB /* ViewController.m */,
 				3D2E5BE517B93AAC00D839AB /* Supporting Files */,
+				B749EB290979C389B4F5D177 /* Resources */,
 			);
 			path = "PPiFlatSegmentedControl-Demo";
 			sourceTree = "<group>";
@@ -133,6 +138,15 @@
 			name = Control;
 			path = ../../Control;
 			sourceTree = "<group>";
+		};
+		B749EB290979C389B4F5D177 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B749E64532B8A0A976C2CCA4 /* eye.png */,
+				B749E3EF83421F1C79A2B094 /* eye@2x.png */,
+			);
+			path = Resources;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -193,6 +207,8 @@
 				3D2E5BF517B93AAC00D839AB /* Default-568h@2x.png in Resources */,
 				3D2E5BF817B93AAC00D839AB /* MainStoryboard.storyboard in Resources */,
 				3D3A158017B94FDE004C044F /* fontawesome-webfont.ttf in Resources */,
+				B749EDE528B7F8B1AFE6006C /* eye.png in Resources */,
+				B749E7309C6B9A68A764A38F /* eye@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

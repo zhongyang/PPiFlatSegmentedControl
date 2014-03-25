@@ -7,6 +7,7 @@
 //
 
 #import "PPiFlatSegmentedControl.h"
+#import "UIAwesomeButton.h"
 #define segment_corner 3.0
 
 @interface PPiFlatSegmentedControl()
@@ -14,6 +15,7 @@
 @property (nonatomic) NSUInteger currentSelected;
 @property (nonatomic,strong) NSMutableArray *separators;
 @property (nonatomic,copy) selectionBlock selBlock;
+@property (nonatomic) CGFloat iconSeparation;
 @end
 
 
@@ -27,50 +29,64 @@
  *
  *	@return	Instantiation of PPiFlatSegmentedControl
  */
-- (id)initWithFrame:(CGRect)frame items:(NSArray*)items iconPosition:(IconPosition)position andSelectionBlock:(selectionBlock)block{
+- (id)initWithFrame:(CGRect)frame items:(NSArray*)items iconPosition:(IconPosition)position andSelectionBlock:(selectionBlock)block iconSeparation:(CGFloat)separation
+{
     self = [super initWithFrame:frame];
     if (self) {
         //Selection block
         _selBlock=block;
+
+        //Icon separation
+        self.iconSeparation = separation;
         
         //Background Color
         self.backgroundColor=[UIColor clearColor];
-        
+
         //Generating segments
         float buttonWith=round(frame.size.width / items.count);
         int i=0;
         for(NSDictionary *item in items){
             NSString *text=item[@"text"];
-            NSString *icon=item[@"icon"];
+            NSObject *icon=item[@"icon"];
 
-            UIButton *button =[[UIButton alloc] initWithFrame:CGRectMake(buttonWith*i, 0, buttonWith, frame.size.height) text:text icon:icon textAttributes:nil andIconPosition:position];
-
-            [button addTarget:self action:@selector(segmentSelected:) forControlEvents:UIControlEventTouchUpInside];
+            UIAwesomeButton  *button;
+            if([icon isKindOfClass:[UIImage class]]){
+                button = [[UIAwesomeButton alloc] initWithFrame:CGRectMake(buttonWith*i, 0, buttonWith, frame.size.height) text:text iconImage:(UIImage *)icon attributes:@{} andIconPosition:position];
+            }
+            else if([icon isKindOfClass:[NSString class]]){
+                button = [[UIAwesomeButton alloc] initWithFrame:CGRectMake(buttonWith*i, 0, buttonWith, frame.size.height) text:text icon:(NSString *)icon attributes:@{} andIconPosition:position];
+            }
             
+            UIAwesomeButton __weak *wbutton = button;
+            [button setActionBlock:^{
+                [self segmentSelected:wbutton];
+            }];
+
             //Adding to self view
             [self.segments addObject:button];
             [self addSubview:button];
-            
-            
+
+
             //Adding separator
             if(i!=0){
                 UIView *separatorView=[[UIView alloc] initWithFrame:CGRectMake(i*buttonWith, 0, self.borderWidth, frame.size.height)];
                 [self addSubview:separatorView];
                 [self.separators addObject:separatorView];
             }
-            
+
             i++;
         }
-        
+
         //Applying corners
         self.layer.masksToBounds=YES;
         self.layer.cornerRadius=segment_corner;
-        
+
         //Default selected 0
         _currentSelected=0;
     }
     return self;
 }
+
 #pragma mark - Lazy instantiations
 -(NSMutableArray*)segments{
     if(!_segments)_segments=[[NSMutableArray alloc] init];
@@ -85,7 +101,7 @@
     if(sender){
         NSUInteger selectedIndex=[self.segments indexOfObject:sender];
         [self setEnabled:YES forSegmentAtIndex:selectedIndex];
-        
+
         //Calling block
         if(self.selBlock){
             self.selBlock(selectedIndex);
@@ -113,32 +129,37 @@
     }else{
         self.layer.borderWidth=0;
     }
-    
+
     //Updating segments color
     for(UIView *separator in self.separators){
         separator.backgroundColor=self.borderColor;
         separator.frame=CGRectMake(separator.frame.origin.x, separator.frame.origin.y,self.borderWidth , separator.frame.size.height);
     }
-    
+
     //Modifying buttons with current State
-    for (UIButton *segment in self.segments){
+    for (UIAwesomeButton *segment in self.segments){
         //Setting icon Position
         if(self.iconPosition)
             [segment setIconPosition:self.iconPosition];
         
+        //Set text aligment
+        [segment setTextAlignment:NSTextAlignmentCenter];
+        
+        //Setting icon separation
+        [segment setSeparation:self.iconSeparation];
+
         //Setting format depending on if it's selected or not
         if([self.segments indexOfObject:segment]==self.currentSelected){
             //Selected-one
             if(self.selectedColor)[segment setBackgroundColor:self.selectedColor forUIControlState:UIControlStateNormal];
             if(self.selectedTextAttributes)
-                [segment setTextAttributes:self.selectedTextAttributes forUIControlState:UIControlStateNormal];
+                [segment setAttributes:self.selectedTextAttributes forUIControlState:UIControlStateNormal];
         }else{
             //Non selected
             if(self.color)[segment setBackgroundColor:self.color forUIControlState:UIControlStateNormal];
             if(self.textAttributes)
-                [segment setTextAttributes:self.textAttributes forUIControlState:UIControlStateNormal];
+                [segment setAttributes:self.textAttributes forUIControlState:UIControlStateNormal];
         }
-        segment.titleLabel.textAlignment = NSTextAlignmentCenter;
     }
 }
 -(void)setSelectedColor:(UIColor *)selectedColor{
@@ -167,11 +188,9 @@
 -(void)setTitle:(id)title forSegmentAtIndex:(NSUInteger)index{
     //Getting the Segment
     if(index<self.segments.count){
-        UIButton *segment=self.segments[index];
+        UIAwesomeButton *segment=self.segments[index];
         if([title isKindOfClass:[NSString class]]){
             [segment setButtonText:title];
-        }else if ([title isKindOfClass:[NSAttributedString class]]){
-            [segment setAttributedTitle:title forState:UIControlStateNormal];
         }
     }
 }
