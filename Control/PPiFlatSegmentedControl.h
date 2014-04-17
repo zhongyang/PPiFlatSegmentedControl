@@ -32,6 +32,7 @@ typedef void(^selectionBlock)(NSUInteger segmentIndex);
 @property (nonatomic,strong) NSDictionary *textAttributes;
 @property (nonatomic,strong) NSDictionary *selectedTextAttributes;
 @property (nonatomic)  IconPosition iconPosition;
+@property (nonatomic,readonly) NSUInteger numberOfSegments;
 
 - (id)initWithFrame:(CGRect)frame items:(NSArray*)items iconPosition:(IconPosition)position andSelectionBlock:(selectionBlock)block iconSeparation:(CGFloat)separation;
 -(void)setEnabled:(BOOL)enabled forSegmentAtIndex:(NSUInteger)segment;
