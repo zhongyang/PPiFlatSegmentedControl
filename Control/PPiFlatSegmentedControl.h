@@ -11,7 +11,7 @@
 #import "UIAwesomeButton.h"
 typedef void(^selectionBlock)(NSUInteger segmentIndex);
 
-@interface PPiFlatSegmentedControl : UIView
+@interface PPiFlatSegmentedControl : UIControl
 
 /**
  *	PROPERTIES
