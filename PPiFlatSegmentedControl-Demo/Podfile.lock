@@ -1,18 +1,18 @@
 PODS:
   - FontAwesome+iOS (0.1.1)
-  - PPiAwesomeButton (1.3.7):
+  - PPiAwesomeButton (1.4.4):
     - FontAwesome+iOS
 
 DEPENDENCIES:
-  - PPiAwesomeButton (from `https://github.com/pepibumur/PPiAwesomeButton.git`, commit `4f6002ea8e`)
+  - PPiAwesomeButton (from `https://github.com/pepibumur/PPiAwesomeButton.git`, commit `8854fb8500`)
 
 EXTERNAL SOURCES:
   PPiAwesomeButton:
-    :commit: 4f6002ea8e
+    :commit: 8854fb8500
     :git: https://github.com/pepibumur/PPiAwesomeButton.git
 
 SPEC CHECKSUMS:
   FontAwesome+iOS: 243c5309e90d5788909b0f859f75ecff4a20f88f
-  PPiAwesomeButton: 21213d3259728acbd82b8928d7ed7004e402dfcf
+  PPiAwesomeButton: d9f36dfaee8bb0de606ec957b86e08eac42ee0b3
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.32.1
