@@ -120,6 +120,10 @@
     return (index==self.currentSelected);
 }
 
+- (NSUInteger)numberOfSegments {
+  return self.segments.count;
+}
+
 #pragma mark - Setters
 -(void)updateSegmentsFormat{
     //Setting border color
